@@ -1,0 +1,90 @@
+# Config for the built-in demo. Every event, project, sponsor and winner here is fictional.
+event:
+  name: Demo Hack
+  context: >-
+    Demo Hack is a fictional 24-hour student hackathon used to show how JudgePack works.
+    Teams have up to four people and many are at their first hackathon.
+
+criteria:
+  - id: impact
+    name: Impact
+    weight: 1
+    description: Does the project address a real problem for a clearly identified group of people?
+    anchors:
+      1: No clear problem or user.
+      3: A plausible problem and user, but the link to what was built is loose or untested.
+      5: A specific, real problem and user, with evidence the solution helps them.
+  - id: execution
+    name: Technical execution
+    weight: 1
+    description: How much was actually built and working by the end of the event, and how sound is it?
+    anchors:
+      1: Little or nothing works; mostly slides or mock-ups.
+      3: A working core with rough edges or faked parts.
+      5: A complete, working build that holds up, with thoughtful technical choices.
+  - id: design
+    name: Design and usability
+    weight: 1
+    description: Is it easy for its intended users to use, including disabled users?
+    anchors:
+      1: Confusing or unusable for the intended users.
+      3: Usable, with some friction.
+      5: Clear, accessible and shaped around how its users actually behave.
+  - id: originality
+    name: Originality
+    weight: 1
+    description: Is the idea or approach fresh, or a meaningful twist on a familiar one?
+    anchors:
+      1: A direct copy of a common hackathon project.
+      3: A familiar idea with a sensible twist.
+      5: A genuinely new idea or approach.
+
+challenges:
+  - id: social-impact
+    name: Best Social Impact
+    sponsor: Northlight Foundation
+    brief: >-
+      For the project most likely to improve life for an underserved community, such as disabled
+      people, carers, low-income families or people facing health inequality.
+    prize_names: ["Best Social Impact"]
+  - id: data
+    name: Best Use of Data
+    sponsor: Quarry Analytics
+    brief: >-
+      For the project that makes the smartest use of real data to reveal something useful, with
+      honest handling of accuracy and limitations.
+    prize_names: ["Best Use of Data"]
+  - id: beginner
+    name: Best Beginner Team
+    brief: For the strongest project from a team where most members are at their first hackathon.
+    prize_names: ["Best Beginner Team"]
+
+# The demo's (fictional) paper sheet. Quality maps to the AI's technical execution score; the
+# demo rubric has no theme criterion, so theme, teamwork and presentation aren't compared.
+judging_sheet:
+  - column: teamwork
+    max: 10
+  - column: originality
+    max: 10
+    criterion: originality
+  - column: theme
+    max: 10
+  - column: presentation
+    max: 10
+  - column: quality
+    max: 20
+    criterion: execution
+
+model:
+  provider: mock
+  samples: 3
+  temperature: 0.4
+
+pairwise:
+  opponents_per_project: 4
+
+evaluation:
+  win_prizes: any
+  # Who the team is, not how good the project is, so it isn't counted as a win.
+  exclude_prizes: ["beginner"]
+  bootstrap: 1000

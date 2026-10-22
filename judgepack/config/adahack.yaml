@@ -1,0 +1,287 @@
+# AdaHack configuration.
+#
+# Everything the AI is told about the event, and how judging works, lives here. Changing the
+# rubric or adding a year means editing this file, not the code.
+
+event:
+  name: AdaHack
+  context: >-
+    AdaHack is a one-day student hackathon in Edinburgh for women and gender minorities in tech,
+    run by Edinburgh Hoppers. Teams of up to four build a project in a single day, and many
+    participants are at their first hackathon.
+
+# The criteria from the paper judging sheet that a write-up can speak to. Teamwork and
+# presentation are on the sheet too, but only exist in the room, so the AI doesn't score them.
+# Weights follow the sheet: project quality is out of 20, the others out of 10.
+# "{theme}" is replaced with each year's theme; in a year with no theme set, that criterion is left out.
+criteria:
+  - id: originality
+    name: Originality
+    weight: 1
+    description: Is the project original? Did the team make the idea their own, with some personality?
+    anchors:
+      1: A direct copy of a common tutorial or hackathon project.
+      3: A familiar idea with a sensible twist of the team's own.
+      5: A fresh idea or approach with a clear personality.
+  - id: theme
+    name: Theme
+    weight: 1
+    description: How well does the project fit this year's theme of {theme}?
+    anchors:
+      1: No real connection to {theme}.
+      3: Connected to {theme}, but the link is shallow or only claimed.
+      5: "{theme} is central to what the project does, and the write-up shows how."
+  - id: quality
+    name: Project quality
+    weight: 2
+    description: How good is the overall project? Is the idea good? Think of the code and other technical aspects.
+    anchors:
+      1: Little or nothing built; mostly a plan or mock-ups.
+      3: A working core with rough edges or faked parts.
+      5: A complete, working build with sound technical choices and a good idea behind it.
+
+# One entry per year. The headings must match the event names in winners.csv.
+# A challenge without a brief can still be matched to judging sheets and winners,
+# but the AI won't be asked whether projects fit it.
+events:
+  AdaHack 2026:
+    theme: Sustainability
+    context: It took place on Saturday 3 October 2026.
+    challenges:
+      - id: jane-street
+        name: Sustainable transport
+        sponsor: Jane Street
+        prize_names: ["Jane Street"]
+        brief: >-
+          Jane Street workers usually travel to the office by car. Make a program that encourages
+          them to take an alternative, more sustainable route to work. Ideas: gamify actions; find
+          ways to convince employees to walk or take the bus; show how it benefits the employee.
+          Transport is responsible for 13.7% of global greenhouse gas emissions.
+      - id: g-research
+        name: Carbon emissions and profits
+        sponsor: G-Research
+        prize_names: ["G-Research"]
+        brief: >-
+          How can businesses grow sustainably without sacrificing profitability? Design and develop
+          a programme that helps established businesses and emerging ventures quantify their carbon
+          footprint, explore alternative business strategies, and identify the optimal balance
+          between financial performance and environmental impact. Examples: an interactive
+          dashboard, a financial modelling tool that compares cost alternatives, a carbon footprint
+          calculator.
+      - id: optiver
+        name: Carbon portfolio diversity
+        sponsor: Optiver
+        prize_names: ["Optiver"]
+        brief: >-
+          Build a carbon credit portfolio that delivers 100,000 of CO2e on a budget and survives the
+          unexpected, while trying to minimise carbon emissions. Teams were given data based on the
+          UC Berkeley Voluntary Registry Offsets Database, with synthetic prices and failure
+          probabilities.
+      - id: ppl
+        name: Greener by Postcode
+        sponsor: People's Postcode Lottery
+        prize_names: ["PPL", "Postcode Lottery", "People's Postcode Lottery"]
+        brief: >-
+          Design and build something that helps neighbours keep their postcode area green. Show them
+          what's happening where they live (the air, the green space, the local electricity), then
+          give them a reason to act on it together. Stretch goal: make it work better the more of the
+          street joins in. Suggested data: Carbon Intensity API, postcodes.io, Open-Meteo Air Quality,
+          OpenStreetMap Overpass and EPC Open Data.
+      - id: hoppers
+        name: Coding for Sustainability
+        sponsor: Edinburgh Hoppers
+        prize_names: ["Hoppers"]
+        brief: >-
+          Consider the United Nations Sustainable Development Goals. Using the Scottish Government's
+          open data, find a way to apply these goals to solve a sustainability issue in Edinburgh.
+          The brief included getting-started resources for beginners.
+      - id: compsoc
+        name: Environmental disaster detection
+        sponsor: CompSoc
+        prize_names: ["CompSoc"]
+        brief: >-
+          Use open source imaging and sensor data to identify environmental disasters and anomalies
+          as they occur. Bonus points for small-compute solutions that avoid the use of large models
+          or make efficient use of pre-existing (non-language) models in novel ways.
+      - id: hackiest-hack
+        name: Hackiest Hack
+        sponsor: Hackathons UK
+        prize_names: ["Hackiest Hack", "Hackathons UK"]
+        # No brief on purpose: it rewards creativity and absurdity, which isn't a fit the AI should judge.
+
+    # The paper judging sheet, column by column, as typed into judging.csv (total 60).
+    # criterion: the AI criterion it corresponds to. Left out for marks a write-up can't show.
+    judging_sheet:
+      - column: teamwork
+        max: 10
+      - column: originality
+        max: 10
+        criterion: originality
+      - column: theme
+        max: 10
+        criterion: theme
+      - column: presentation
+        max: 10
+      - column: quality
+        max: 20
+        criterion: quality
+
+  AdaHack 2025:
+    theme: Innovation
+    challenges:
+      - id: hoppers-optiver
+        name: Financial Intelligence
+        sponsor: Edinburgh Hoppers and Optiver
+        prize_names: ["Hoppers + Optiver", "Optiver"]
+        brief: >-
+          Financial education is no longer taught in schools, so many young people never come into
+          contact with it. UN Sustainable Development Goal 8 aims for inclusive and sustainable
+          economic growth. Come up with a solution that introduces people to personal finance.
+          Examples: an accessible dashboard for new users showing spending, savings, debt and interest;
+          a game reflecting day-to-day financial decisions that scores smart choices; a visualisation
+          tool that explains investing.
+      - id: hoppers
+        name: Coding for Good
+        sponsor: Edinburgh Hoppers
+        prize_names: ["Hoppers Challenge"]
+        brief: >-
+          Design something that raises awareness of an overlooked or opposed social issue of the
+          team's choice: a game, digital art, an app or a website. Suggested issues: climate change
+          and its unequal effects on marginalised communities; trans rights in the UK after the 2025
+          Supreme Court ruling on the Equality Act; the women's health gap in the NHS. The brief
+          included getting-started resources for beginners.
+      - id: ppl
+        name: The Giving Game
+        sponsor: People's Postcode Lottery
+        prize_names: ["People's Postcode Lottery", "Postcode Lottery", "PPL"]
+        brief: >-
+          Design and build a gamified donation simulator where a player can donate to different causes
+          or charities and see the impact of their choices (trees planted, meals served and so on).
+          The aim is to show People's Postcode Lottery players the real impact of their donations in a
+          fun, engaging and innovative way. Suggested data: GlobalGiving API, Charity Commission API,
+          Our World in Data API, UN Goals.
+      - id: compsoc
+        name: Web accessibility
+        sponsor: CompSoc
+        prize_names: ["CompSoc"]
+        brief: >-
+          Create an API, framework, plugin or other tool that detects and fixes common accessibility
+          issues on websites. It must identify common issues in a page (missing alt text, poor colour
+          contrast, broken heading structure, keyboard access, missing focus indicators, unlabelled
+          form controls, missing captions, ARIA misuse), make small non-destructive fixes, and show the
+          page before and after. A README with demo, installation and API documentation was required.
+          Measurable standards: WCAG AA contrast (4.5:1 normal text, 3:1 large), one clear H1 with a
+          logical heading outline, all controls usable by keyboard with visible focus.
+
+    # 2025's sheet (total 55). Innovation covered both fit to the theme and originality, so it is
+    # compared with the theme criterion. Learning, teamwork and presentation only exist in the room.
+    judging_sheet:
+      - column: teamwork
+        max: 10
+      - column: innovation
+        max: 10
+        criterion: theme
+      - column: learning
+        max: 10
+      - column: presentation
+        max: 5
+      - column: quality
+        max: 20
+        criterion: quality
+
+  AdaHack 2024:
+    theme: Education
+    challenges:
+      - id: blackrock
+        name: Follow The Money
+        sponsor: BlackRock
+        prize_names: ["BlackRock"]
+        brief: >-
+          Come up with a solution that introduces students to personal finance and educates them about
+          it, since financial wellbeing comes from making good decisions, which needs financial
+          knowledge. Examples: a game simulating day-to-day life and financial decisions; an
+          interactive trading platform or trading bot that makes investing easy for beginners;
+          predictive models of market data, or comparing "time in the market" with "timing the
+          market"; a visualisation of compounding and retirement saving. Marks for creativity, as long
+          as the technology clearly benefits financial education and wellbeing. No extra marks for
+          using a paid API over a free one.
+      - id: handson
+        name: STEM for primary schools
+        sponsor: HandsOn
+        prize_names: ["HandsOn"]
+        brief: >-
+          Design something that can be used to teach primary school children about STEM, for HandsOn's
+          visits to youth groups. It must let an adult use the computer on behalf of the class, suit a
+          group of at most five children aged 6 to 12, and be interactive. Examples: a game where the
+          children vote on the next choice and the teacher enters it; a science experiment simulator.
+          Marked on ingenuity, fit to the brief, quality and interactivity (10 each), teamwork and
+          presentation (5 each).
+      - id: formula-student
+        name: Bag Bonanza
+        sponsor: Edinburgh University Formula Student
+        prize_names: ["Formula Student", "EUFS"]
+        brief: >-
+          Create a web application with filtering, search, upload and download for data collected
+          while testing an autonomous racecar. Skills it aims to teach: front-end web development,
+          UX/UI design and presentation.
+      - id: compsoc
+        name: Best Real World Business Concept
+        sponsor: CompSoc
+        prize_names: ["CompSoc"]
+        brief: >-
+          An entrepreneurship challenge: not just a business idea but a built product (code) that
+          really solves a problem for consumers or business clients. Teams should show how it would
+          make money, why now is the right time to build it, and why they are the team to do it.
+      - id: hoppers-beginner
+        name: Beginner game
+        sponsor: Edinburgh Hoppers
+        prize_names: ["Hoppers Beginner"]
+        brief: >-
+          A beginner-friendly challenge needing no prior knowledge: create a game, from a provided
+          tutorial (rock paper scissors, snake, pong in Python or JavaScript), the team's own tutorial
+          or none, and edit it to make it the team's own. Judged on how much the team learnt and tried,
+          how well less experienced members could contribute, and games that show the team's
+          personality.
+      - id: hackathons-uk
+        name: HackathonsUK challenge
+        sponsor: Hackathons UK
+        prize_names: ["HackathonsUK", "Hackathons UK"]
+        # No brief available.
+
+    # The Hoppers sheet (total 50). Other challenges marked against their own criteria; HandsOn's
+    # are in its brief. Personality is the closest thing to originality on this sheet.
+    judging_sheet:
+      - column: teamwork
+        max: 10
+      - column: learning
+        max: 10
+      - column: personality
+        max: 10
+        criterion: originality
+      - column: presentation
+        max: 10
+      - column: quality
+        max: 10
+        criterion: quality
+
+  # Add earlier years the same way once their themes and briefs are known.
+
+model:
+  provider: gemini            # gemini | anthropic | mock
+  name: gemini-3.6-flash      # check the current model list in Google AI Studio
+  temperature: 0.4            # above 0 so repeated samples can disagree; that spread is the uncertainty signal
+  samples: 3                  # independent scores per project, averaged
+  requests_per_minute: 10     # keep under your key's limit; raise it on a paid key
+  workers: 4
+  # USD per million tokens, used only for the cost line in the report.
+  # Paid-tier prices for gemini-3.6-flash as listed in October 2026; check the pricing page before quoting.
+  price_input_per_million: 0.75
+  price_output_per_million: 3.75
+
+pairwise:
+  opponents_per_project: 4    # each project is compared with about this many others, both orders
+
+evaluation:
+  win_prizes: any             # or a list of name fragments, e.g. ["1st", "2nd", "3rd", "overall"]
+  exclude_prizes: ["beginner"]  # prizes about the team rather than the project
+  bootstrap: 2000
