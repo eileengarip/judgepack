@@ -1,5 +1,7 @@
 # JudgePack
 
+https://github.com/eileengarip/judgepack/actions/workflows/tests.yml/badge.svg
+
 AI briefing packs for hackathon judges, plus an honest test of whether the AI's judgement matches the real judges.
 
 JudgePack reads a hackathon's Devpost submissions and produces:
