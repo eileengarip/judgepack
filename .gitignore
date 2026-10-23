@@ -1,12 +1,12 @@
-   __pycache__/
-   *.egg-info/
-   .venv/
-   .pytest_cache/
-   .judgepack_cache/
-   out/
-   data/
-   *.csv
-   !judgepack/demo_data/*.csv
-   .env
-   build/
-   dist/
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.judgepack_cache/
+out/
+data/
+*.csv
+!judgepack/demo_data/*.csv
+.env
+build/
+dist/
